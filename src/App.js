@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import { UserContext } from './Context'
+
+import InfoFooter from './components/InfoFooter';
+import SideBar from "./components/SideBar";
+import CatCard from "./components/CatCard";
+
+import Button from "@mui/material/Button"
+import SearchBar from "material-ui-search-bar";
+
+
+import './index.css'
 
 function App() {
+  const [catsearchname, setCatSearchName] = useState("")
+
+  function refreshPage() {
+    window.location.reload(false)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      <SideBar />
+      <div className='searchbarbox'>
+        <SearchBar
+          placeholder="serach for cat "
+          catsearchname={catsearchname}
+          onRequestSearch={(value) => setCatSearchName(value)}
+        />
+      </div>
+      <div className='picbox'>
+        <UserContext.Provider value={catsearchname}>
+          <CatCard catsearchname="catsearchname" />
+        </UserContext.Provider>
+      </div>
+      <div className='buttonbox'>
+        <Button variant='contained'
+          size='large'
+          onClick={refreshPage}
+          style={{ width: 120, height: 60 }}>
+          New Cat
+        </Button>
+      </div>
+      <div className='footerbox'>
+        <InfoFooter />
+      </div>
+
+    </main>
   );
 }
 
