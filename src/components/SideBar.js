@@ -1,4 +1,4 @@
-import { useState, useEffect, React } from 'react';
+import { useState, useEffect, useContext, React } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -19,6 +19,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import FmdGood from '@mui/icons-material/FmdGood';
 import PhoneIcon from '@mui/icons-material/Phone';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
+
+import { UserContext } from '../Context'
 
 const drawerWidth = 240;
 
@@ -91,11 +93,13 @@ export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
 
+
   const [name, setName] = useState('')
   const [city, setCity] = useState('')
   const [phone, setPhone] = useState('')
   const [photo, setPhoto] = useState('')
 
+  let searchcatname = useContext(UserContext)
   const owner_url = 'https://randomuser.me/api/'
 
   //fetch user info
@@ -117,7 +121,7 @@ export default function MiniDrawer() {
       .catch(error => {
         console.error("Error fetching owner info ", error);
       })
-  }, [])
+  }, [searchcatname])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -216,25 +220,25 @@ export default function MiniDrawer() {
           </ListItemButton>
         </List>
         <List>
-        <ListItemButton
-          key="phone number"
-          sx={{
-            minHeight: 48,
-            justifyContent: open ? 'initial' : 'center',
-            px: 2.5,
-          }}
-        >
-          <ListItemIcon
+          <ListItemButton
+            key="phone number"
             sx={{
-              minWidth: 0,
-              mr: open ? 3 : 'auto',
-              justifyContent: 'center',
+              minHeight: 48,
+              justifyContent: open ? 'initial' : 'center',
+              px: 2.5,
             }}
           >
-            <InsertPhotoIcon />
-          </ListItemIcon>
-          <ListItemText primary={<img src={photo} alt="cat owner" />} sx={{ opacity: open ? 1 : 0 }} />
-        </ListItemButton>
+            <ListItemIcon
+              sx={{
+                minWidth: 0,
+                mr: open ? 3 : 'auto',
+                justifyContent: 'center',
+              }}
+            >
+              <InsertPhotoIcon />
+            </ListItemIcon>
+            <ListItemText primary={<img src={photo} alt="cat owner" />} sx={{ opacity: open ? 1 : 0 }} />
+          </ListItemButton>
         </List>
         <Divider />
 

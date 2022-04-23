@@ -19,33 +19,32 @@ function App() {
   }
 
   return (
-    <main className="App">
-      <SideBar />
-      <div className='searchbarbox'>
-        <SearchBar
-          placeholder="serach for cat "
-          catsearchname={catsearchname}
-          onRequestSearch={(value) => setCatSearchName(value)}
-        />
-      </div>
-      <div className='picbox'>
-        <UserContext.Provider value={catsearchname}>
+    <UserContext.Provider value={catsearchname}>
+      <main className="App">
+        <SideBar />
+        <div className='searchbarbox'>
+          <SearchBar
+            placeholder="serach for cat "
+            catsearchname={catsearchname}
+            onRequestSearch={(value) => setCatSearchName(value)}
+          />
+        </div>
+        <div className='picbox'>
           <CatCard catsearchname="catsearchname" />
-        </UserContext.Provider>
-      </div>
-      <div className='buttonbox'>
-        <Button variant='contained'
-          size='large'
-          onClick={refreshPage}
-          style={{ width: 120, height: 60 }}>
-          New Cat
-        </Button>
-      </div>
-      <div className='footerbox'>
-        <InfoFooter />
-      </div>
-
-    </main>
+        </div>
+        <div className='buttonbox'>
+          <Button variant='contained'
+            size='large'
+            onClick={refreshPage}
+            style={{ width: 120, height: 60 }}>
+            New Cat
+          </Button>
+        </div>
+        <div className='footerbox'>
+          <InfoFooter />
+        </div>
+      </main>
+    </UserContext.Provider>
   );
 }
 
