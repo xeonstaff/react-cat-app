@@ -24,7 +24,7 @@ function App() {
         <SideBar />
         <div className='searchbarbox'>
           <SearchBar
-            placeholder="serach for cat "
+            placeholder="search for cat "
             catsearchname={catsearchname}
             onRequestSearch={(value) => setCatSearchName(value)}
           />
